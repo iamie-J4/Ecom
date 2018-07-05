@@ -18,3 +18,26 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');
+
+Route::resource('users', 'UserController');
+
+Route::resource('products', 'ProductController');
+
+Route::resource('payments', 'PaymentController');
+
+Route::resource('trips', 'TripController');
+
+Route::resource('orders', 'OrderController');
+
+Route::resource('carts', 'CartController');
+
+Route::resource('messages', 'MessageController');
+
+Route::resource('addresses', 'AddressController');
+
+Route::resource('invoices', 'InvoiceController');

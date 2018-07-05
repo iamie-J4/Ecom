@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePreordersTable extends Migration
+class CreateTripsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,10 @@ class CreatePreordersTable extends Migration
      */
     public function up()
     {
-        Schema::create('preorders', function (Blueprint $table) {
+        Schema::create('trips', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('departure');
+            $table->string('arrival');
             $table->softDeletes();
             $table->timestamps();
         });
@@ -27,6 +29,6 @@ class CreatePreordersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('preorders');
+        Schema::dropIfExists('trips');
     }
 }
