@@ -8,8 +8,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * Class Payment
  * @package App\Models
- * @version July 5, 2018, 5:19 am UTC
+ * @version July 5, 2018, 8:00 pm UTC
  *
+ * @property integer user_id
+ * @property integer product_id
+ * @property decimal paid
+ * @property decimal balance
  */
 class Payment extends Model
 {
@@ -25,7 +29,10 @@ class Payment extends Model
 
 
     public $fillable = [
-        
+        'user_id',
+        'product_id',
+        'paid',
+        'balance'
     ];
 
     /**
@@ -34,7 +41,9 @@ class Payment extends Model
      * @var array
      */
     protected $casts = [
-        'id' => 'integer'
+        'id' => 'integer',
+        'user_id' => 'integer',
+        'product_id' => 'integer'
     ];
 
     /**

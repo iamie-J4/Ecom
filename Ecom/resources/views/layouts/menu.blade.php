@@ -34,3 +34,19 @@
     <a href="{!! route('invoices.index') !!}"><i class="fa fa-edit"></i><span>Invoices</span></a>
 </li>
 
+<li class="{{ Request::is('addresses*') ? 'active' : '' }}">
+    <a href="{!! route('addresses.index') !!}"><i class="fa fa-edit"></i><span>Addresses</span></a>
+</li>
+
+<li class="{{ Request::is('payments*') ? 'active' : '' }}">
+    <a href="{!! route('payments.index') !!}"><i class="fa fa-edit"></i><span>Payments</span></a>
+</li>
+
+<li class="{{ Request::is('orders*') ? 'active' : '' }}">
+    <a href="{!! route('orders.index') !!}"><i class="fa fa-edit"></i><span>Orders</span></a>
+</li>
+
+<li class="{{ Request::is('users*') ? 'active' : '' }}">
+    <a href="{!! route('users.index') !!}"><i class="fa fa-edit"></i><span>Users</span></a>
+</li>
+

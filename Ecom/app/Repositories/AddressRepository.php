@@ -8,7 +8,7 @@ use InfyOm\Generator\Common\BaseRepository;
 /**
  * Class AddressRepository
  * @package App\Repositories
- * @version July 5, 2018, 5:22 am UTC
+ * @version July 5, 2018, 7:58 pm UTC
  *
  * @method Address findWithoutFail($id, $columns = ['*'])
  * @method Address find($id, $columns = ['*'])
@@ -20,6 +20,7 @@ class AddressRepository extends BaseRepository
      * @var array
      */
     protected $fieldSearchable = [
+        'user_id',
         'body',
         'city',
         'state',

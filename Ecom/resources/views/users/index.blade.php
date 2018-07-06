@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+<div class="col-lg-9 col-md-9 col-sm-9">
     <section class="content-header">
         <h1 class="pull-left">Users</h1>
         <h1 class="pull-right">
@@ -22,5 +23,20 @@
         
         </div>
     </div>
+    </div>
+
+<br>
+ <div class="col-lg-3 col-md-3 col-sm-3 pull-right">
+    <ul class="list-group list-group-warning">
+        <strong>Top 10 Users Transactions</strong>
+        @foreach($users as $user)
+      <li class="list-group-item">
+        <span class="badge">14</span>
+        {{$user->first_name}}
+      </li>
+      @endforeach
+</ul>
+
+ </div>   
 @endsection
 

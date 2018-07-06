@@ -1,14 +1,18 @@
 <table class="table table-responsive" id="orders-table">
     <thead>
         <tr>
-            
+            <th>User Id</th>
+        <th>Product Id</th>
+        <th>Status</th>
             <th colspan="3">Action</th>
         </tr>
     </thead>
     <tbody>
     @foreach($orders as $order)
         <tr>
-            
+            <td>{!! $order->user_id !!}</td>
+            <td>{!! $order->product_id !!}</td>
+            <td>{!! $order->status !!}</td>
             <td>
                 {!! Form::open(['route' => ['orders.destroy', $order->id], 'method' => 'delete']) !!}
                 <div class='btn-group'>

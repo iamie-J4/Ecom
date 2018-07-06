@@ -43,17 +43,31 @@
         <form method="post" action="{{ url('/register') }}">
 
             {!! csrf_field() !!}
-
-            <div class="form-group has-feedback{{ $errors->has('name') ? ' has-error' : '' }}">
-                <input type="text" class="form-control" name="name" value="{{ old('name') }}" placeholder="Full Name">
+            
+            {{--first name--}}
+            <div class="form-group has-feedback{{ $errors->has('first_name') ? ' has-error' : '' }}">
+                <input type="text" class="form-control" name="first_name" value="{{ old('name') }}" placeholder="First Name">
                 <span class="glyphicon glyphicon-user form-control-feedback"></span>
 
-                @if ($errors->has('name'))
+                @if ($errors->has('first_name'))
                     <span class="help-block">
-                        <strong>{{ $errors->first('name') }}</strong>
+                        <strong>{{ $errors->first('first_name') }}</strong>
                     </span>
                 @endif
             </div>
+
+            {{--last name--}}
+            <div class="form-group has-feedback{{ $errors->has('last_name') ? ' has-error' : '' }}">
+                <input type="text" class="form-control" name="last_name" value="{{ old('name') }}" placeholder="Last Name">
+                <span class="glyphicon glyphicon-user form-control-feedback"></span>
+
+                @if ($errors->has('last_name'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('last_name') }}</strong>
+                    </span>
+                @endif
+            </div>
+
 
             <div class="form-group has-feedback{{ $errors->has('email') ? ' has-error' : '' }}">
                 <input type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="Email">

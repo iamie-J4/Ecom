@@ -4,6 +4,24 @@
     <p>{!! $order->id !!}</p>
 </div>
 
+<!-- User Id Field -->
+<div class="form-group">
+    {!! Form::label('user_id', 'User Id:') !!}
+    <p>{!! $order->user_id !!}</p>
+</div>
+
+<!-- Product Id Field -->
+<div class="form-group">
+    {!! Form::label('product_id', 'Product Id:') !!}
+    <p>{!! $order->product_id !!}</p>
+</div>
+
+<!-- Status Field -->
+<div class="form-group">
+    {!! Form::label('status', 'Status:') !!}
+    <p>{!! $order->status !!}</p>
+</div>
+
 <!-- Deleted At Field -->
 <div class="form-group">
     {!! Form::label('deleted_at', 'Deleted At:') !!}

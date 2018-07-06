@@ -8,9 +8,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * Class User
  * @package App\Models
- * @version July 5, 2018, 5:18 am UTC
+ * @version July 5, 2018, 8:35 pm UTC
  *
- * @property string name
+ * @property string first_name
+ * @property string last_name
  * @property string email
  * @property string password
  * @property integer role_id
@@ -31,7 +32,8 @@ class User extends Model
 
 
     public $fillable = [
-        'name',
+        'first_name',
+        'last_name',
         'email',
         'password',
         'role_id',
@@ -46,7 +48,8 @@ class User extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'name' => 'string',
+        'first_name' => 'string',
+        'last_name' => 'string',
         'email' => 'string',
         'password' => 'string',
         'role_id' => 'integer',

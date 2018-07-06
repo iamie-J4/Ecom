@@ -41,3 +41,11 @@ Route::resource('messages', 'MessageController');
 Route::resource('addresses', 'AddressController');
 
 Route::resource('invoices', 'InvoiceController');
+
+Route::resource('addresses', 'AddressController');
+
+Route::resource('payments', 'PaymentController');
+
+Route::resource('orders', 'OrderController');
+
+Route::resource('users', 'UserController');

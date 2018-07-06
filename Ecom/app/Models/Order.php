@@ -8,8 +8,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * Class Order
  * @package App\Models
- * @version July 5, 2018, 5:20 am UTC
+ * @version July 5, 2018, 8:01 pm UTC
  *
+ * @property integer user_id
+ * @property integer product_id
+ * @property string status
  */
 class Order extends Model
 {
@@ -25,7 +28,9 @@ class Order extends Model
 
 
     public $fillable = [
-        
+        'user_id',
+        'product_id',
+        'status'
     ];
 
     /**
@@ -34,7 +39,10 @@ class Order extends Model
      * @var array
      */
     protected $casts = [
-        'id' => 'integer'
+        'id' => 'integer',
+        'user_id' => 'integer',
+        'product_id' => 'integer',
+        'status' => 'string'
     ];
 
     /**

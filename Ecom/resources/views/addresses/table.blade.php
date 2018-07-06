@@ -1,7 +1,8 @@
 <table class="table table-responsive" id="addresses-table">
     <thead>
         <tr>
-            <th>Body</th>
+            <th>User Id</th>
+        <th>Body</th>
         <th>City</th>
         <th>State</th>
         <th>Country</th>
@@ -12,6 +13,7 @@
     <tbody>
     @foreach($addresses as $address)
         <tr>
+            <td>{!! $address->user_id !!}</td>
             <td>{!! $address->body !!}</td>
             <td>{!! $address->city !!}</td>
             <td>{!! $address->state !!}</td>
