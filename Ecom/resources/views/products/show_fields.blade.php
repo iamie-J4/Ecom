@@ -28,6 +28,18 @@
     <p>{!! $product->price !!}</p>
 </div>
 
+<!-- Qty Field -->
+<div class="form-group">
+    {!! Form::label('qty', 'Qty:') !!}
+    <p>{!! $product->qty !!}</p>
+</div>
+
+<!-- O Qty Field -->
+<div class="form-group">
+    {!! Form::label('o_qty', 'O Qty:') !!}
+    <p>{!! $product->o_qty !!}</p>
+</div>
+
 <!-- Source Field -->
 <div class="form-group">
     {!! Form::label('source', 'Source:') !!}

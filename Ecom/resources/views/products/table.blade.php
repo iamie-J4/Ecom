@@ -5,6 +5,8 @@
         <th>Name</th>
         <th>Description</th>
         <th>Price</th>
+        <th>Qty</th>
+        <th>O Qty</th>
         <th>Source</th>
         <th>Image</th>
         <th>Category</th>
@@ -20,6 +22,8 @@
             <td>{!! $product->name !!}</td>
             <td>{!! $product->description !!}</td>
             <td>{!! $product->price !!}</td>
+            <td>{!! $product->qty !!}</td>
+            <td>{!! $product->o_qty !!}</td>
             <td>{!! $product->source !!}</td>
             <td>{!! $product->image !!}</td>
             <td>{!! $product->category !!}</td>

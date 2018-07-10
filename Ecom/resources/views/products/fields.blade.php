@@ -22,6 +22,18 @@
     {!! Form::number('price', null, ['class' => 'form-control']) !!}
 </div>
 
+<!-- Qty Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('qty', 'Qty:') !!}
+    {!! Form::number('qty', null, ['class' => 'form-control']) !!}
+</div>
+
+<!-- O Qty Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('o_qty', 'O Qty:') !!}
+    {!! Form::number('o_qty', null, ['class' => 'form-control']) !!}
+</div>
+
 <!-- Source Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('source', 'Source:') !!}

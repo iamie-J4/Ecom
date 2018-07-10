@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>InfyOm Laravel Generator | Registration Page</title>
+    <title>Ecom | Registration Page</title>
 
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -34,7 +34,7 @@
 <body class="hold-transition register-page">
 <div class="register-box">
     <div class="register-logo">
-        <a href="{{ url('/home') }}"><b>InfyOm </b>Generator</a>
+        <a href="{{ url('/home') }}"><b>E-com </b>Registration</a>
     </div>
 
     <div class="register-box-body">
@@ -43,10 +43,14 @@
         <form method="post" action="{{ url('/register') }}">
 
             {!! csrf_field() !!}
-            
+
+            <select class="form-control">
+              <option value="volvo">Customer</option>
+              <option value="saab">Seller</option>
+            </select><br>
             {{--first name--}}
             <div class="form-group has-feedback{{ $errors->has('first_name') ? ' has-error' : '' }}">
-                <input type="text" class="form-control" name="first_name" value="{{ old('name') }}" placeholder="First Name">
+                <input type="text" class="form-control" name="first_name" value="{{ old('first_name') }}" placeholder="First Name">
                 <span class="glyphicon glyphicon-user form-control-feedback"></span>
 
                 @if ($errors->has('first_name'))

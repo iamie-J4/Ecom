@@ -53,7 +53,7 @@ class User extends Model
         'email' => 'string',
         'password' => 'string',
         'role_id' => 'integer',
-        'Hp_number' => 'string',
+        'Hp_number' => 'integer',
         'remember_token' => 'string'
     ];
 

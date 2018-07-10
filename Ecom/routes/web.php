@@ -49,3 +49,5 @@ Route::resource('payments', 'PaymentController');
 Route::resource('orders', 'OrderController');
 
 Route::resource('users', 'UserController');
+
+Route::resource('products', 'ProductController');
