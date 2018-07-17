@@ -66,13 +66,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     @else
                         <a href="{{ route('login') }}">Login</a>
                         Or
-						<button class="dropdown " id="mybutton1">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Register <span class="caret"></span></a>				
-						  <ul class="dropdown-menu" role="menu">
-			                <a href="{{ url('/register')}}">Customer</a> ||
-			                <a href="#">Seller</a>
-			              </ul> 
-			            </button>
+			             <a href="{{ url('/register')}}">Register</a> 
                         <!--<a href="{{ route('register') }}">Register</a>-->
                     @endauth
                 </div>
