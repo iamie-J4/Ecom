@@ -52,8 +52,11 @@
                         @can('isAdmin')
                         <li class="{{ Request::is('users*') ? 'active' : '' }} pull right">
                         <a href="{!! route('users.index') !!}"><i class="fa fa-users"></i> <span>All Users</span></a>
-                        @endcan
-                    </li>
+                        </li>
+                        <li class="{{ Request::is('users*') ? 'active' : '' }} pull right">
+                        <a href="{!! route('products.index') !!}"><i class="fa fa-sitemap"></i> <span>All Products</span></a>
+                        </li>
+                    @endcan
                                             <!-- User Account Menu -->
                         <li class="dropdown user user-menu">
                             <!-- Menu Toggle Button -->

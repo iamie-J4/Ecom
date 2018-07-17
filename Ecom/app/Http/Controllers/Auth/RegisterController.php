@@ -48,6 +48,7 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
+            'role_id' => 'required|string|max:250',
             'last_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
@@ -63,11 +64,22 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        /*$UserRole = $request->input('role_id');
+        if ($UserRole == 'Customer') {
+            attach('role_id'.'3');
+        }
+        if ($UserRole == 'Seller') {
+            attach('role_id'.'2');
+        }*/
         return User::create([
+           // 'role_id'=> '3',
+            'role_id' => $data['role_id'],
             'first_name' => $data['first_name'],
             'last_name' => $data['last_name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
     }
+
+
 }

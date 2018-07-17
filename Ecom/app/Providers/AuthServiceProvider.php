@@ -26,14 +26,14 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies($gate);
         $gate->define('isAdmin', function($user){
-            return $user->role_id == 1;
+            return $user->role_id == 'WksbTsjfbkYYSjsn';
         });
     
-        $gate->define('isAuthor', function($user){
-            return $user->role_id == 2;
+        $gate->define('isSeller', function($user){
+            return $user->role_id == 'sjfhTHDBskbfajbjfswwnsfh';
         });
-        $gate->define('isUser', function($user){
-            return $user->role_id == 2;
+        $gate->define('isCustomer', function($user){
+            return $user->role_id == 'SGFHDdfhhdfoodhfRShsxxsydv';
         });
     }
 }

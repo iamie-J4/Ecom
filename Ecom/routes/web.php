@@ -23,6 +23,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+//route::resource('register1', 'Register1Controller@register')->name('register1');
 
 Route::resource('users', 'UserController');
 
@@ -51,3 +52,7 @@ Route::resource('orders', 'OrderController');
 Route::resource('users', 'UserController');
 
 Route::resource('products', 'ProductController');
+
+Route::resource('products', 'ProductController');
+
+Route::post('upload', 'ProductController@store');

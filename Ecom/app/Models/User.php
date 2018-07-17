@@ -52,7 +52,7 @@ class User extends Model
         'last_name' => 'string',
         'email' => 'string',
         'password' => 'string',
-        'role_id' => 'integer',
+        'role_id' => 'string',
         'Hp_number' => 'integer',
         'remember_token' => 'string'
     ];

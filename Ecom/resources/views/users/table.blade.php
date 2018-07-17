@@ -20,7 +20,15 @@
             <td>{!! $user->last_name !!}</td>
             <td>{!! $user->email !!}</td>
            {{-- <td>{!! $user->password !!}</td>--}}
-            <td>{!! $user->role_id !!}</td>
+           @if($user->role_id=='WksbTsjfbkYYSjsn')
+            <td>Admin</td>
+            @endif
+            @if($user->role_id=='sjfhTHDBskbfajbjfswwnsfh')
+            <td>Seller</td>
+            @endif
+            @if($user->role_id=='SGFHDdfhhdfoodhfRShsxxsydv')
+            <td>Customer</td>
+            @endif
             <td>{!! $user->Hp_number !!}</td>
             {{--<td>{!! $user->remember_token !!}</td>--}}
             <td>
@@ -36,3 +44,4 @@
     @endforeach
     </tbody>
 </table>
+{{ $users->links() }}

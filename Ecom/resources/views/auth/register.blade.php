@@ -43,11 +43,20 @@
         <form method="post" action="{{ url('/register') }}">
 
             {!! csrf_field() !!}
+            <div class="form-group has-feedback{{ $errors->has('role_id') ? ' has-error' : '' }}">
+                <label style="color: #FF7F50">Choose Account type</label>
+            <select name="role_id" class="form-control">
+              <option >Select here:</option>
+              <option value="SGFHDdfhhdfoodhfRShsxxsydv">Customer</option>
+              <option value="sjfhTHDBskbfajbjfswwnsfh">Seller</option>
+            </select>
+            @if ($errors->has('role_id'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('role_id') }}</strong>
+                    </span>
+                @endif
 
-            <select class="form-control">
-              <option value="volvo">Customer</option>
-              <option value="saab">Seller</option>
-            </select><br>
+            </div>
             {{--first name--}}
             <div class="form-group has-feedback{{ $errors->has('first_name') ? ' has-error' : '' }}">
                 <input type="text" class="form-control" name="first_name" value="{{ old('first_name') }}" placeholder="First Name">

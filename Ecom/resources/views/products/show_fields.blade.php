@@ -1,3 +1,11 @@
+<!-- Image Field -->
+<div class="form-group">
+    {!! Form::label('image', 'Image:') !!}
+    <p>{!! $product->image !!}</p>
+</div>
+
+<img src="$product->image" alt="">
+
 <!-- Id Field -->
 <div class="form-group">
     {!! Form::label('id', 'Id:') !!}
@@ -44,12 +52,6 @@
 <div class="form-group">
     {!! Form::label('source', 'Source:') !!}
     <p>{!! $product->source !!}</p>
-</div>
-
-<!-- Image Field -->
-<div class="form-group">
-    {!! Form::label('image', 'Image:') !!}
-    <p>{!! $product->image !!}</p>
 </div>
 
 <!-- Category Field -->

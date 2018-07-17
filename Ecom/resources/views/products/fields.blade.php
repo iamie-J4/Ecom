@@ -1,7 +1,9 @@
 <!-- User Id Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('user_id', 'User Id:') !!}
-    {!! Form::text('user_id', null, ['class' => 'form-control']) !!}
+{!! Form::hidden('user_id', Auth::user()->id, ['class' => 'form-control']) !!}
+
+    <div class="form-group col-sm-6" >
+{!! Form::label('image', 'Upload Image:') !!}
+    <input type="file" name="image" enctype="multipart/form-data">
 </div>
 
 <!-- Name Field -->
@@ -41,15 +43,18 @@
 </div>
 
 <!-- Image Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('image', 'Image:') !!}
-    {!! Form::text('image', null, ['class' => 'form-control']) !!}
-</div>
+
 
 <!-- Category Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('category', 'Category:') !!}
-    {!! Form::text('category', null, ['class' => 'form-control']) !!}
+    <select class="form-control">
+              <option value="volvo">Food</option>
+              <option value="saab">Clothes</option>
+              <option value="saab">Cosmetics</option>
+              <option value="saab">Health</option>
+              <option value="saab">Gadgets</option>
+            </select>
 </div>
 
 <!-- Postage Field -->
@@ -61,7 +66,12 @@
 <!-- Status Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('status', 'Status:') !!}
-    {!! Form::text('status', null, ['class' => 'form-control']) !!}
+    <select class="form-control">
+              <option value="volvo">Available</option>
+              <option value="saab">Pending</option>
+              <option value="saab">Processing</option>
+              <option value="saab">Sold Out</option>
+            </select>
 </div>
 
 <!-- Submit Field -->
