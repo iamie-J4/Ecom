@@ -1,7 +1,6 @@
 <!-- Image Field -->
 <div class="form-group">
-    {!! Form::label('image', 'Image:') !!}
-    <p>{!! $product->image !!}</p>
+    <img src="{{asset('images/'. $product->image)}}" alt="Product Photo" style="width: 20%; height: 30%; border: 2px solid #FF7F50">
 </div>
 
 <img src="$product->image" alt="">

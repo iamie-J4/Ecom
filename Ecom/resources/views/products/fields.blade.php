@@ -1,9 +1,10 @@
 <!-- User Id Field -->
 {!! Form::hidden('user_id', Auth::user()->id, ['class' => 'form-control']) !!}
 
-    <div class="form-group col-sm-6" >
-{!! Form::label('image', 'Upload Image:') !!}
-    <input type="file" name="image" enctype="multipart/form-data">
+<!-- Image Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('image', 'Upload Image:') !!}
+    {!! Form::file('image') !!}
 </div>
 
 <!-- Name Field -->
@@ -41,9 +42,6 @@
     {!! Form::label('source', 'Source:') !!}
     {!! Form::text('source', null, ['class' => 'form-control']) !!}
 </div>
-
-<!-- Image Field -->
-
 
 <!-- Category Field -->
 <div class="form-group col-sm-6">

@@ -3349,5 +3349,14 @@ button#mybutton1{
     border: 2px solid #FF7F50;
 }
 
+img#myImg2{
+
+    width: 20%; 
+    height: 30%;
+    border-radius:5px;
+    border: 2px solid #FF7F50;
+
+}
+
 
 /*--//responsive-design---*/

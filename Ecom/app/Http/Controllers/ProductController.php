@@ -8,6 +8,8 @@ use App\Repositories\ProductRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use App\Models\Product;
+use Image;
 use Flash;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
@@ -34,11 +36,7 @@ class ProductController extends AppBaseController
             'image'=> 'string|max:250',
             'name' => 'required|string|max:250',
             'description' => 'string|max:250',
-            'price',
-            'qty',
-            'o_qty',
             'source' => 'string|max:250',
-            'image',
             'category' => 'string|max:250',
             'postage' => 'string|max:250',
             'status' => 'string|max:250',
@@ -50,7 +48,7 @@ class ProductController extends AppBaseController
     }
     public function index(Request $request)
     {
-        if (auth::check()) {
+       
         $this->productRepository->pushCriteria(new RequestCriteria($request));
         $products = $this->productRepository->all();
 
@@ -58,8 +56,6 @@ class ProductController extends AppBaseController
             ->with('products', $products);
         }
 
-        return view('auth.login');
-    }
 
     /**
      * Show the form for creating a new Product.
@@ -81,21 +77,48 @@ class ProductController extends AppBaseController
     public function store(CreateProductRequest $request)
     {
         if (auth::check()) {
-       $cvalue = 'uploads';
-           
-             $input = $request->all(); 
 
-           $image = $request->file('image');
-           if($request->hasFile('image')){ 
-           $ext = $image->guessClientExtension();
-           $imageName = $image->getClientOriginalName();
-           $request->file('image')->move(storage_path("/products"), $imageName);
+            if ($request->hasFile('image')) {
+                $image = $request->file('image');
+                $filename = time(). '.'.$image->getClientOriginalextension();
+                $path = public_path('images/'.$filename);
+                Image::make($image)->save($path);
+
+                //'image' = $filename;
+            }
+
+            $Product = Product::create([
+                'image' => $filename,
+                'user_id' => auth::user()->id,
+                'name'=> $request->input('name'),
+                'description'=> $request->input('description'),
+                'price' => $request->input('price'),
+                'qty' => $request->input('qty'),
+                'o_qty' => $request->input('o_qty'),
+                'category' => $request->input('category'),
+                'postage' => $request->input('postage'),
+                'source' => $request->input('source')
+
+            ]);
+
+            if($Product){
+          return redirect()->route('products.show', ['product'=> $Product->id]);
+        }
+       // $cvalue = 'uploads';
+           
+       //       $input = $request->all(); 
+
+       //     $image = $request->file('image');
+       //     if($request->hasFile('image')){ 
+       //     $ext = $image->guessClientExtension();
+       //     $imageName = $image->getClientOriginalName();
+       //     $request->file('image')->move(storage_path("/products"), $imageName);
            //$input->image = $cvalue."products/".$input->id.'.'.'png';
           // $input->save();
-                  }
+                  
       
 
-        $product = $this->productRepository->create($input);
+        //$product = $this->productRepository->create($input);
 
         Flash::success('Product saved successfully.');
 
