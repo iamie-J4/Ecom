@@ -23,7 +23,8 @@ class CreateProductsTable extends Migration
             $table->integer('o_qty')->nullable()->default(0);
             $table->string('source')->nullable();
             $table->string('image')->nullable();
-            $table->string('category')->nullable();
+            $table->integer('category_id')->nullable();
+            $table->integer('subCategory_id')->nullable();
             $table->string('postage')->nullable();
             $table->string('status')->default('Available'); 
             $table->softDeletes();

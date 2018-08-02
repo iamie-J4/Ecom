@@ -8,6 +8,8 @@ use App\Repositories\ProductRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use App\Category;
+use App\SubCategory;
 use App\Models\Product;
 use Image;
 use Flash;
@@ -30,31 +32,18 @@ class ProductController extends AppBaseController
      * @param Request $request
      * @return Response
      */
-
-    protected function validator(array $data){
-        return validator::make($data, [
-            'image'=> 'string|max:250',
-            'name' => 'required|string|max:250',
-            'description' => 'string|max:250',
-            'source' => 'string|max:250',
-            'category' => 'string|max:250',
-            'postage' => 'string|max:250',
-            'status' => 'string|max:250',
-
-        ]);
-
-
-
-    }
+    
     public function index(Request $request)
     {
        
         $this->productRepository->pushCriteria(new RequestCriteria($request));
         $products = $this->productRepository->all();
 
+        $categories = Category::all();
+
         return view('products.index')
-            ->with('products', $products);
-        }
+            ->with('products', $products)->withCategories($categories);
+    }
 
 
     /**
@@ -64,7 +53,18 @@ class ProductController extends AppBaseController
      */
     public function create()
     {
-        return view('products.create');
+        if (auth::check()) {
+        
+        $categories = Category::all();
+        $subCategories = SubCategory::all();
+        $kats =array();
+        foreach ($categories as $category) {
+            $kats[$category->id] = $category->name;
+        }
+        return view('products.create')->with('categories', $kats)->with('subcategories', $subCategories);
+
+        }
+        return view('auth.login');
     }
 
     /**
@@ -76,6 +76,7 @@ class ProductController extends AppBaseController
      */
     public function store(CreateProductRequest $request)
     {
+
         if (auth::check()) {
 
             if ($request->hasFile('image')) {
@@ -95,32 +96,16 @@ class ProductController extends AppBaseController
                 'price' => $request->input('price'),
                 'qty' => $request->input('qty'),
                 'o_qty' => $request->input('o_qty'),
-                'category' => $request->input('category'),
+                'category_id' => $request->input('category_id'),
                 'postage' => $request->input('postage'),
                 'source' => $request->input('source')
 
             ]);
 
             if($Product){
-          return redirect()->route('products.show', ['product'=> $Product->id]);
-        }
-       // $cvalue = 'uploads';
-           
-       //       $input = $request->all(); 
-
-       //     $image = $request->file('image');
-       //     if($request->hasFile('image')){ 
-       //     $ext = $image->guessClientExtension();
-       //     $imageName = $image->getClientOriginalName();
-       //     $request->file('image')->move(storage_path("/products"), $imageName);
-           //$input->image = $cvalue."products/".$input->id.'.'.'png';
-          // $input->save();
-                  
-      
-
-        //$product = $this->productRepository->create($input);
-
-        Flash::success('Product saved successfully.');
+                Flash::success('Product created successfully.');
+                return redirect()->route('products.show', ['product'=> $Product->id]);
+            }
 
         return redirect(route('products.index'));
 
@@ -157,8 +142,15 @@ class ProductController extends AppBaseController
      */
     public function edit($id)
     {
-        if ('user_id'== auth::user()->id) {
-            $product = $this->productRepository->findWithoutFail($id);
+        $product = $this->productRepository->findWithoutFail($id);
+
+        if ($product->user_id == auth::user()->id) {
+
+        $categories = Category::all();
+        $kats =array();
+        foreach ($categories as $category) {
+            $kats[$category->id] = $category->name;
+        }
 
         if (empty($product)) {
             Flash::error('Product not found');
@@ -166,7 +158,7 @@ class ProductController extends AppBaseController
             return redirect(route('products.index'));
         }
 
-        return view('products.edit')->with('product', $product);
+        return view('products.edit')->with('product', $product)->with('categories', $kats);
         }
 
         Flash::error('Unauthorized access');
@@ -182,21 +174,44 @@ class ProductController extends AppBaseController
      *
      * @return Response
      */
-    public function update($id, UpdateProductRequest $request)
+    public function update(Product $product, UpdateProductRequest $request)
     {
-        $product = $this->productRepository->findWithoutFail($id);
+        if (auth::check()) {
 
-        if (empty($product)) {
-            Flash::error('Product not found');
+            $Product = Product::find($product->id);
 
-            return redirect(route('products.index'));
-        }
+            if ($request->hasFile('image')) {
+                $image = $request->file('image');
+                $filename = time(). '.'.$image->getClientOriginalextension();
+                $path = public_path('images/'.$filename);
+                Image::update($image)->save($path);
 
-        $product = $this->productRepository->update($request->all(), $id);
+                //'image' = $filename;
+            }
 
-        Flash::success('Product updated successfully.');
+            $Product->update([
+                'image' => $filename,
+                'user_id' => auth::user()->id,
+                'name'=> $request->input('name'),
+                'description'=> $request->input('description'),
+                'price' => $request->input('price'),
+                'qty' => $request->input('qty'),
+                'o_qty' => $request->input('o_qty'),
+                'category_id' => $request->input('category_id'),
+                'postage' => $request->input('postage'),
+                'source' => $request->input('source')
+
+            ]);
+
+            if($Product){
+                Flash::success('Product Updated successfully.');
+                return redirect()->route('products.show', ['product'=> $Product->id]);
+            }
 
         return redirect(route('products.index'));
+
+        }
+        return view('auth.login');
     }
 
     /**

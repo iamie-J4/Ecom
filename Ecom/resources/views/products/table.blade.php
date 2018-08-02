@@ -26,7 +26,7 @@
             <td>{!! $product->o_qty !!}</td>
             <td>{!! $product->source !!}</td>
             <td>{!! $product->image !!}</td>
-            <td>{!! $product->category !!}</td>
+            <td>{!! $product->category->name !!}</td>
             <td>{!! $product->postage !!}</td>
             <td>{!! $product->status !!}</td>
             <td>

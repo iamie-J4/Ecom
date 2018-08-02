@@ -44,7 +44,7 @@ class Product extends Model
         'o_qty',
         'source',
         'image',
-        'category',
+        'category_id',
         'postage',
         'status'
     ];
@@ -63,7 +63,7 @@ class Product extends Model
         'o_qty' => 'integer',
         'source' => 'string',
         'image' => 'string',
-        'category' => 'string',
+        'category_id' => 'integer',
         'postage' => 'string',
         'status' => 'string'
     ];
@@ -76,6 +76,10 @@ class Product extends Model
     public static $rules = [
         
     ];
+
+    public function category(){
+      return $this->belongsTo('App\Category');
+    }
 
     
 }

@@ -25,6 +25,18 @@ class UpdateProductRequest extends FormRequest
      */
     public function rules()
     {
-        return Product::$rules;
+        return [
+        // 'image'=> 'string|max:250',
+            'name' => 'required|string|max:250',
+            'description' => 'string|max:250',
+            'price' => 'required|integer',
+            'qty' => 'required|integer',
+            'o_qty' => 'required|integer',
+            //'source' => 'string|max:250',
+            'category_id' => 'required|integer',
+            // 'subCategory_id' => 'required|integer',
+            // 'postage' => 'string|max:250',
+            // 'status' => 'string|max:250',
+    ];
     }
 }

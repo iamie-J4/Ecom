@@ -28,7 +28,7 @@ class ProductRepository extends BaseRepository
         'o_qty',
         'source',
         'image',
-        'category',
+        'category_id',
         'postage',
         'status'
     ];

@@ -1,3 +1,69 @@
+
+
+
+
+<div class="form-group">
+        <div class="row col-lg-6 col-md-6 col-sm-6">
+        
+            <br>        
+            <img src="{{asset('images/'. $product->image)}}" class="img-responsive" style="width: 80%; border: 2px solid #FF7F50" alt="Product Photo"> <hr>
+
+            <a class="btn btn-info btn-info" href="{!! route('products.index') !!}"><span><<</span> All Products</a> 
+
+        
+    </div>
+
+    </div>
+    <div class=" well row col-lg-6 col-md-6 col-sm-6">
+        <p>
+            <h3><span class="label label-info"></span><strong>{{$product->name}}</strong></h3>
+            <h6><i> ({{$product->category->name}})</i></h6>
+        </p><hr>
+
+        <p>Price: <i><del>RM 999</del></i><strong style="color: darkred"> <h1><ins>RM {!! $product->price !!}</ins> </h1></strong></p><hr>
+
+        {!! Form::label('description', 'About:') !!}
+        <p class="form-spacing-top">{!! $product->description !!}</p><hr>
+
+        <p>Available Quantity: <span style="color: darkgreen">{!! $product->qty !!} units</span></p><hr>
+
+        <p>Ordered Quantity: {!! $product->o_qty !!}</p><hr>
+
+        <p>Posted on: {!! $product->created_at !!}</p><hr>
+
+        <p>Updated on: {!! $product->updated_at !!}</p><hr>
+
+        <a class="btn btn-info btn-info" href="{!! route('products.edit', [$product->id]) !!}"><i class="fa fa-edit"></i> Edit</a> 
+
+                                <div class="btn btn-info btn-danger">
+                                <a
+                                  href="#"
+                                      onclick="
+                                      var result = confirm('Are you sure you wish to delete this Product?');
+                                          if( result ){
+                                                  event.preventDefault();
+                                                  document.getElementById('delete-form').submit();
+                                          }
+                                              "
+                                              style="color: white">
+                                      <i class="glyphicon glyphicon-trash"></i> Delete
+                                  </a>
+
+                                  <form id="delete-form" action="{{ route('products.destroy',[$product->id]) }}"
+                                    method="POST" style="display: none;">
+                                    <input type="hidden" name="_method" value="delete">
+                                            {{ csrf_field() }}
+                                  </form>
+                            </div>
+       </div>   
+</div>
+
+
+
+
+
+
+{{--
 <!-- Image Field -->
 <div class="form-group">
     <img src="{{asset('images/'. $product->image)}}" alt="Product Photo" style="width: 20%; height: 30%; border: 2px solid #FF7F50">
@@ -53,11 +119,11 @@
     <p>{!! $product->source !!}</p>
 </div>
 
-<!-- Category Field -->
+<!-- Category Field 
 <div class="form-group">
     {!! Form::label('category', 'Category:') !!}
     <p>{!! $product->category !!}</p>
-</div>
+</div>-->
 
 <!-- Postage Field -->
 <div class="form-group">
@@ -88,4 +154,4 @@
     {!! Form::label('updated_at', 'Updated At:') !!}
     <p>{!! $product->updated_at !!}</p>
 </div>
-
+--}}

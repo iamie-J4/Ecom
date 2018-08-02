@@ -53,6 +53,10 @@ Route::resource('users', 'UserController');
 
 Route::resource('products', 'ProductController');
 
+Route::resource('categories', 'CategoryController');
+
+Route::resource('subcategories', 'SubCategoryController');
+
 Route::resource('products', 'ProductController');
 
 Route::post('upload', 'ProductController@store');
