@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Category;
 use App\SubCategory;
+use App\Productgroup;
 use App\Models\Product;
 use Image;
 use Flash;
@@ -57,14 +58,25 @@ class ProductController extends AppBaseController
         
         $categories = Category::all();
         $subCategories = SubCategory::all();
+        $productgroups = Productgroup::all();
         $kats =array();
+        $subkats =array();
+        $groups = array();
         foreach ($categories as $category) {
             $kats[$category->id] = $category->name;
         }
-        return view('products.create')->with('categories', $kats)->with('subcategories', $subCategories);
+
+        foreach ($subCategories as $subcat) {
+            $subkats[$subcat->id] = $subcat->name;
+        }
+
+        foreach ($productgroups as $group) {
+            $groups[$group->id] = $group->name;
+        }
+        return view('products.create')->with('categories', $kats)->with('subcategories', $subkats)->with('productgroups', $groups);
 
         }
-        return view('auth.login');
+        return redirect()->intended('auth.login');
     }
 
     /**
@@ -82,7 +94,7 @@ class ProductController extends AppBaseController
             if ($request->hasFile('image')) {
                 $image = $request->file('image');
                 $filename = time(). '.'.$image->getClientOriginalextension();
-                $path = public_path('images/'.$filename);
+                $path = public_path('images/products/'.$filename);
                 Image::make($image)->save($path);
 
                 //'image' = $filename;
@@ -97,6 +109,8 @@ class ProductController extends AppBaseController
                 'qty' => $request->input('qty'),
                 'o_qty' => $request->input('o_qty'),
                 'category_id' => $request->input('category_id'),
+                'subcategory_id' => $request->input('subcategory_id'),
+                'productgroup_id' => $request->input('productgroup_id'),
                 'postage' => $request->input('postage'),
                 'source' => $request->input('source')
 
@@ -129,7 +143,6 @@ class ProductController extends AppBaseController
 
             return redirect(route('products.index'));
         }
-
         return view('products.show')->with('product', $product);
     }
 
@@ -140,25 +153,25 @@ class ProductController extends AppBaseController
      *
      * @return Response
      */
-    public function edit($id)
+    public function edit(Product $product)
     {
-        $product = $this->productRepository->findWithoutFail($id);
+        $Product = Product::find($product->id);
 
-        if ($product->user_id == auth::user()->id) {
+        if ($Product->user_id == auth::user()->id) {
 
         $categories = Category::all();
-        $kats =array();
+        $kats = array();
         foreach ($categories as $category) {
             $kats[$category->id] = $category->name;
         }
 
-        if (empty($product)) {
+        if (empty($Product)) {
             Flash::error('Product not found');
 
             return redirect(route('products.index'));
         }
 
-        return view('products.edit')->with('product', $product)->with('categories', $kats);
+        return view('products.edit')->with('product', $Product)->with('categories', $kats);
         }
 
         Flash::error('Unauthorized access');
@@ -177,6 +190,7 @@ class ProductController extends AppBaseController
     public function update(Product $product, UpdateProductRequest $request)
     {
         if (auth::check()) {
+            if ($Product->user_id == auth::user()->id) {
 
             $Product = Product::find($product->id);
 
@@ -207,7 +221,8 @@ class ProductController extends AppBaseController
                 Flash::success('Product Updated successfully.');
                 return redirect()->route('products.show', ['product'=> $Product->id]);
             }
-
+        }
+        Flash::error('Unauthorized Access');
         return redirect(route('products.index'));
 
         }
@@ -223,9 +238,12 @@ class ProductController extends AppBaseController
      */
     public function destroy($id)
     {
-        $product = $this->productRepository->findWithoutFail($id);
 
-        if (empty($product)) {
+        $product = $this->productRepository->findWithoutFail($id);
+        
+        if (auth::user()->id == $product->user->id) {
+        
+            if (empty($product)) {
             Flash::error('Product not found');
 
             return redirect(route('products.index'));
@@ -236,5 +254,7 @@ class ProductController extends AppBaseController
         Flash::success('Product deleted successfully.');
 
         return redirect(route('products.index'));
+        }
+        
     }
 }

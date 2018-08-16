@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Category;
+use App\Models\Product;
 use Gate;
 use Image;
 use Flash;
@@ -24,6 +25,11 @@ class CategoryController extends Controller
         return view('categories.index')->with('categories', $categories);
     }
 
+    public function prods()
+    {
+        return view('notAdmin.userProducts');
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -31,6 +37,9 @@ class CategoryController extends Controller
      */
     public function create(Request $request)
     {
+        if (!Gate::allows('isAdmin')) {
+            abort(404,'Unauthorized Access');
+        }
 
         if (!Gate::allows('isAdmin')) {
             abort(404,'Unauthorized Access');
@@ -74,12 +83,13 @@ class CategoryController extends Controller
      * @param  \App\Categories  $categories
      * @return \Illuminate\Http\Response
      */
-    public function show(Category $category)
+    public function show(Category $category, Product $product)
     {
 
         $category = Category::find($category->id);
+        // $products = Product::where($product->category_id = $category->id)->paginate(8);
 
-        return view('categories.show', ['category' =>$category]);
+        return view('categories.show')->with('category', $category);
     }
 
     /**
@@ -90,6 +100,9 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
+        if (!Gate::allows('isAdmin')) {
+            abort(404,'Unauthorized Access');
+        }
         if (!Gate::allows('isAdmin')) {
             abort(404,'Unauthorized Access');
         }
@@ -139,6 +152,9 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
+        if (!Gate::allows('isAdmin')) {
+            abort(404,'Unauthorized Access');
+        }
         if (!Gate::allows('isAdmin')) {
             abort(404,'Cannot perform this Action');
         }

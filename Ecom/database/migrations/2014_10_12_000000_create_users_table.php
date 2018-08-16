@@ -20,7 +20,8 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->string('role_id')->default('SGFHDdfhhdfoodhfRShsxxsydv');
-            $table->string('Hp_number')->default('011');
+            $table->string('Hp_number')->nullable();
+            $table->string('shop_name')->nullable();
             $table->softDeletes();
             $table->rememberToken();
             $table->timestamps();

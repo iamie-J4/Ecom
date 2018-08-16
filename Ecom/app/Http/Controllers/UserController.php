@@ -8,6 +8,7 @@ use App\Repositories\UserRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
+use Gate;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
 
@@ -29,6 +30,9 @@ class UserController extends AppBaseController
      */
     public function index(Request $request)
     {
+        if (!Gate::allows('isAdmin')) {
+            abort(404,'Unauthorized Access');
+        }
         $this->userRepository->pushCriteria(new RequestCriteria($request));
         $users = $this->userRepository->paginate(10);
 
@@ -43,6 +47,9 @@ class UserController extends AppBaseController
      */
     public function create()
     {
+        if (!Gate::allows('isAdmin')) {
+            abort(404,'Unauthorized Access');
+        }
         return view('users.create');
     }
 
@@ -73,6 +80,7 @@ class UserController extends AppBaseController
      */
     public function show($id)
     {
+        
         $user = $this->userRepository->findWithoutFail($id);
 
         if (empty($user)) {
@@ -138,6 +146,9 @@ class UserController extends AppBaseController
      */
     public function destroy($id)
     {
+        if (!Gate::allows('isAdmin')) {
+            abort(404,'Unauthorized Access');
+        }
         $user = $this->userRepository->findWithoutFail($id);
 
         if (empty($user)) {

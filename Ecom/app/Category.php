@@ -41,12 +41,22 @@ class Category extends Model
         
     ];
 
+    public static function kategories(){
+        return static::all();
+    }
+
+
     public function products(){
       return $this->hasMany('App\Models\Product');
+    }
+    
+    public function productgroups(){
+      return $this->hasMany('App\SubCategory');
     }
 
     public function subCategories(){
       return $this->hasMany('App\SubCategory');
     }
+    
 
 }

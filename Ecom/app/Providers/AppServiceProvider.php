@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Schema;
 
 class AppServiceProvider extends ServiceProvider
@@ -16,6 +17,20 @@ class AppServiceProvider extends ServiceProvider
     {
         //
         Schema::defaultStringLength(191);
+
+        \View::composer('layouts.app', function($view){
+            $view->with('categories', \App\Category::kategories());
+        });
+
+        \View::composer('welcome', function($view){
+            $view->with('kategories', \App\Category::kategories());
+        });
+
+
+        \View::composer('notAdmin.appUser', function($view){
+            $view->with('kategoriez', \App\Category::kategories());
+        });
+
     }
 
     /**

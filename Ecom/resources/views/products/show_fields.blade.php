@@ -6,7 +6,7 @@
         <div class="row col-lg-6 col-md-6 col-sm-6">
         
             <br>        
-            <img src="{{asset('images/'. $product->image)}}" class="img-responsive" style="width: 80%; border: 2px solid #FF7F50" alt="Product Photo"> <hr>
+            <img src="{{asset('images/products/'. $product->image)}}" class="img-responsive" style="width: 80%; border: 2px solid #FF7F50" alt="Product Photo"> <hr>
 
             <a class="btn btn-info btn-info" href="{!! route('products.index') !!}"><span><<</span> All Products</a> 
 
@@ -17,8 +17,13 @@
     <div class=" well row col-lg-6 col-md-6 col-sm-6">
         <p>
             <h3><span class="label label-info"></span><strong>{{$product->name}}</strong></h3>
-            <h6><i> ({{$product->category->name}})</i></h6>
-        </p><hr>
+            <h6><i> (<a href="{!! route('categories.show', [$product->category->id]) !!}">{{$product->category->name}}</a>)</i></h6>
+        </p>
+        @can('isAdmin')
+        <hr>
+        <p>Owner: <a href="{!! route('users.show', [$product->user->id]) !!}"><strong style="color: darkgreen">#{{$product->user->id}} {{$product->user->first_name}} {{$product->user->last_name}}</strong></a></p>
+        @endcan
+        <hr>
 
         <p>Price: <i><del>RM 999</del></i><strong style="color: darkred"> <h1><ins>RM {!! $product->price !!}</ins> </h1></strong></p><hr>
 

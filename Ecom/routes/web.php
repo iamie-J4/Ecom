@@ -11,9 +11,10 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+Route::get('/', 'WelcomeController@index');
 
 Auth::routes();
 
@@ -53,9 +54,13 @@ Route::resource('users', 'UserController');
 
 Route::resource('products', 'ProductController');
 
+Route::get('prods', 'CategoryController@prods');
+
 Route::resource('categories', 'CategoryController');
 
 Route::resource('subcategories', 'SubCategoryController');
+
+Route::resource('productgroups', 'ProductgroupController');
 
 Route::resource('products', 'ProductController');
 

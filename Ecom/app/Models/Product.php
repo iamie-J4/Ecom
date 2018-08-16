@@ -45,6 +45,7 @@ class Product extends Model
         'source',
         'image',
         'category_id',
+        'productgroup_id',
         'postage',
         'status'
     ];
@@ -64,6 +65,7 @@ class Product extends Model
         'source' => 'string',
         'image' => 'string',
         'category_id' => 'integer',
+        'productgroup_id' => 'integer',
         'postage' => 'string',
         'status' => 'string'
     ];
@@ -79,6 +81,14 @@ class Product extends Model
 
     public function category(){
       return $this->belongsTo('App\Category');
+    }
+
+    public function subcategory(){
+      return $this->belongsTo('App\SubCategory');
+    }
+
+     public function user(){
+      return $this->belongsTo('App\User');
     }
 
     

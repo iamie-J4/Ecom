@@ -25,6 +25,7 @@ class CreateProductsTable extends Migration
             $table->string('image')->nullable();
             $table->integer('category_id')->nullable();
             $table->integer('subCategory_id')->nullable();
+            $table->integer('productgroup_id')->nullable();
             $table->string('postage')->nullable();
             $table->string('status')->default('Available'); 
             $table->softDeletes();

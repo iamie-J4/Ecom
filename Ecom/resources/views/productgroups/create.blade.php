@@ -3,9 +3,9 @@
 @section('content')
 <div class="container">
     <div class="well col-lg-6 col-md-6 col-sm-6">
-    	<h1>Create a SubCategory</h1>
+    	<h1>Create a SubCategory Group</h1>
     	<div class="box box-info"></div>
-		{!! Form::open(['route' => 'subcategories.store']) !!}
+		{!! Form::open(['route' => 'productgroups.store']) !!}
 				 {{ csrf_field() }}
 			<div class="form-group col-lg-12 col-md-12 col-sm-12">
 
@@ -13,12 +13,6 @@
 			    {!! Form::label('category_id', 'Choose category:') !!}
 			    {!! Form::select('category_id', $categories, ['class'=> 'form-control'])!!}
 			</div>
-
-			<div class="form-group col-sm-5" style="margin-right: 3%; margin-left: 2%">
-			    {!! Form::label('productgroup_id', 'Choose a Group:') !!}
-			    {!! Form::select('productgroup_id', $productgroups, ['class'=> 'form-control'])!!}
-			</div>
-
 			<div class="form-group col-sm-5" style="margin-right: 3%; margin-left: 2%">
 			    {!! Form::label('name', 'Name:') !!}
 			    {!! Form::text('name', null, ['class' => 'form-control']) !!}
@@ -26,7 +20,7 @@
 
 			<div class="form-group col-lg-12 col-md-12 col-sm-12">
 			    {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
-			    <a href="{!! route('subcategories.index') !!}" class="btn btn-default">Cancel</a>
+			    <a href="{!! route('productgroups.index') !!}" class="btn btn-default">Cancel</a>
 			</div>
 
         {!! Form::close() !!}

@@ -20,12 +20,16 @@
               <div class=" col-sm-4 col-md-4">
 				<div class="thumbnail" >
 					<h4 class="text-center" style="color: darkgreen">{{$category->name}}</h4>
-					<img src="{{asset('images/categories/'. $category->image)}}" class="img-responsive" style="height: 200px; width: 100%">
+
+					<a href="{!! route('categories.show', [$category->id]) !!}"> 
+					<img src="{{asset('images/categories/'. $category->image)}}" class="img-responsive" style="height: 200px; width: 100%"></a>
+					
 					<div class="caption">
 						<div class="row">
 							<div class="text-center">
 								<a class="btn btn-info btn-info" href="{!! route('categories.show', [$category->id]) !!}"><i class="glyphicon glyphicon-eye-open"></i> View</a> 
-
+								
+								@can('isAdmin')
 								<div class="btn btn-info btn-danger">
 								<a
 					              href="#"
@@ -46,6 +50,7 @@
 					                        {{ csrf_field() }}
 					              </form>
 							</div>
+						@endcan
 							</div>
 						</div>
 

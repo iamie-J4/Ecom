@@ -2,15 +2,25 @@
 {!! Form::hidden('user_id', Auth::user()->id, ['class' => 'form-control']) !!}
 
 <!-- Image Field -->
-<div class="form-group col-sm-5" style="margin-right: 3%; margin-left: 2%">
+<div class="form-group col-sm-3" style=" margin-left: 2%">
     {!! Form::label('image', 'Upload Image:') !!}
     {!! Form::file('image') !!}
 </div>
 
 <!-- Category Field -->
-<div class="form-group col-sm-5" style="margin-right: 3%; margin-left: 2%">
+<div class="form-group col-sm-3" >
     {!! Form::label('category_id', 'Choose category:') !!}
-   <p>Add to: {!! Form::select('category_id', $categories, ['class'=> 'form-control'])!!}</p>
+   <p>Add to: {!! Form::select('category_id', $categories, ['class'=> 'form-control', 'id' => 'category_id'])!!}</p>
+</div>
+
+<div class="form-group col-sm-3" >
+    {!! Form::label('productgroup_id', 'Choose a group:') !!}
+   <p>Add to: {!! Form::select('productgroup_id', $productgroups, ['class'=> 'form-control', 'id' => 'productgroup_id'])!!}</p>
+</div>
+
+<div class="form-group col-sm-3">
+    {!! Form::label('subcategory_id', 'Choose a Sub Category:') !!}
+   <p>Add to: {!! Form::select('subcategory_id', $subcategories, ['class'=> 'form-control'])!!}</p>
 </div>
 
 <!-- Name Field -->
@@ -71,3 +81,20 @@
     {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
     <a href="{!! route('products.index') !!}" class="btn btn-default">Cancel</a>
 </div>
+
+
+{{--<script>
+    $('#category_id').on('change', function(e){
+        console.log(e);
+        var cat_id = e.target.value;
+        //ajax
+        $.get('/ajax-subcat?cat_id='+ cat_id, function(data){
+            //success data
+            $('#subcategory_id').empty();
+            $.each(data, function(index, subcatObj){
+                $('suncategory_id').append('<option value="'+subcatObj.id+'">'+subcatObj.name+'</option>');
+            });
+        });
+    });
+</script>
+--}}

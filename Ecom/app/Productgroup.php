@@ -4,10 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class SubCategory extends Model
+class Productgroup extends Model
 {
-    //
-  protected $table = 'sub_categories';
+    protected $table = 'productgroups';
 
 
 
@@ -21,7 +20,6 @@ class SubCategory extends Model
     public $fillable = [
       'name',
       'category_id',
-      'productgroup_id',
     ];
 
 
@@ -33,7 +31,6 @@ class SubCategory extends Model
      */
     protected $casts = [
         'category_id' => 'integer',
-        'productgroup_id' => 'integer',
         'name' => 'string',
     ];
 
@@ -45,16 +42,15 @@ class SubCategory extends Model
     public static $rules = [
         
     ];
-    
-    public function products(){
-      return $this->hasMany('App\Models\Product');
-    }
 
     public function category(){
       return $this->belongsTo('App\Category');
     }
+    public function products(){
+      return $this->hasMany('App\Models\Product');
+    }
 
-    public function productgroup(){
-      return $this->belongsTo('App\Productgroup');
+    public function subcategories(){
+      return $this->hasMany('App\SubCategory');
     }
 }

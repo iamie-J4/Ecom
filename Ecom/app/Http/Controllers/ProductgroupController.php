@@ -2,16 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\SubCategory;
 use App\Productgroup;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Requests\UpdateSubcategoryRequest;
 use App\Category;
 use Gate;
 use Flash;
 
-class SubCategoryController extends Controller
+class ProductgroupController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,8 +18,8 @@ class SubCategoryController extends Controller
      */
     public function index()
     {
-        $subCategories = SubCategory::all();
-        return view('subcategories.index')->with('subcategories', $subCategories);
+        $productgroups = Productgroup::all();
+        return view('productgroups.index')->with('productgroups', $productgroups);
     }
 
     /**
@@ -34,25 +32,14 @@ class SubCategoryController extends Controller
         if (!Gate::allows('isAdmin')) {
             abort(404,'Unauthorized Access');
         }
-        if (!Gate::allows('isAdmin')) {
-            abort(404,'Unauthorized Access');
-        }
 
         if (auth::check()) {
                     $categories = Category::all();
-                    $subCategories = SubCategory::all();
-                    $productgroups = Productgroup::all();
-                    $groups = array();
                     $kkats =array();
-
-                    foreach ($productgroups as $group) {
-                        $groups[$group->id] = $group->name;
-                    }
-                    
                     foreach ($categories as $category) {
                         $kkats[$category->id] = $category->name;
                     }
-                return view('subcategories.create')->with('categories', $kkats)->with('productgroups', $groups);
+                return view('productgroups.create')->with('categories', $kkats);
             }
         return view('auth.login');
     }
@@ -65,14 +52,13 @@ class SubCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $subcategory = SubCategory::create([
+        $productgroup = Productgroup::create([
             'category_id' => $request->input('category_id'),
-            'productgroup_id' => $request->input('productgroup_id'),
             'name' => $request->input('name')
         ]);
 
-        if($subcategory){
-          return redirect()->route('subcategories.show', ['subcategory'=> $subcategory->id]);
+        if($productgroup){
+          return redirect()->route('productgroups.show', ['productgroup'=> $productgroup->id]);
         }
     }
 
@@ -82,13 +68,25 @@ class SubCategoryController extends Controller
      * @param  \App\subCategories  $subCategories
      * @return \Illuminate\Http\Response
      */
-    public function show(SubCategory $subcategory)
+    public function show(Productgroup $productgroup)
     {
 
         // $subCategory = SubCategory::find($subCategory->id);
-        $subcategory = SubCategory::where('id', $subcategory->id)->first();
 
-        return view('subcategories.show', ['subcategory'=> $subcategory]);
+        $productgroup = Productgroup::where('id', $productgroup->id)->first();
+        if (auth::check()) {
+            
+            if (auth::user()->role_id == 'WksbTsjfbkYYSjsn') {
+            return view('productgroups.show', ['productgroup'=> $productgroup]);
+            }
+            else
+
+            return view('notAdmin.userProducts', ['productgroup'=> $productgroup]);
+            }
+            else
+
+        return view('notAdmin.userProducts', ['productgroup'=> $productgroup]);
+
     }
 
     /**
@@ -102,22 +100,19 @@ class SubCategoryController extends Controller
         if (!Gate::allows('isAdmin')) {
             abort(404,'Unauthorized Access');
         }
-        if (!Gate::allows('isAdmin')) {
-            abort(404,'Unauthorized Access');
-        }
         
-        $subcategory = SubCategory::find($subcategory->id);
+        $productgroup = Productgroup::find($productgroup->id);
         $categories = Category::all();
         $kkats =array();
             foreach ($categories as $category) {
                 $kkats[$category->id] = $category->name;
             }
 
-        if (empty($subcategory)) {
-            Flash::error('SubCategory not found');
-            return view('subcategories.index');
+        if (empty($productgroup)) {
+            Flash::error('productgroup not found');
+            return view('productgroups.index');
         }
-        return view('subcategories.edit')->with('subcategory', $subcategory)->with('categories', $kkats);
+        return view('productgroups.edit')->with('productgroup', $productgroup)->with('categories', $kkats);
     }
 
     /**
@@ -127,16 +122,15 @@ class SubCategoryController extends Controller
      * @param  \App\subCategories  $subCategories
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateSubcategoryRequest $request, SubCategory $subcategory)
+    public function update(Request $request, Productgroup $productgroup)
     {
-         $subCategoryUpdate = SubCategory::where('id', $subcategory->id)->update([
-            'category_id' => $request->input('category_id'),
-            'name' => $request->input('name')
+         $productgroupUpdate = Productgroup::where('id', $productgroup->id)->update([   'category_id' => $request->input('category_id'),
+                'name' => $request->input('name')
         ]);
 
-        if ($subCategoryUpdate) {
-            Flash::success('SubCategory Updated Successifully');
-            return redirect()->route('subcategories.show', ['subcategory' =>$subcategory->id]);
+        if ($productgroupUpdate) {
+            Flash::success('Product group Updated Successifully');
+            return redirect()->route('productgroups.show', ['productgroup' =>$productgroup->id]);
         }
         // $subcategory = SubCategory::findorFail($id);
         // $subcategory->update($request->all(), $id);
@@ -149,17 +143,17 @@ class SubCategoryController extends Controller
      * @param  \App\subCategories  $subCategories
      * @return \Illuminate\Http\Response
      */
-    public function destroy(SubCategory $subcategory)
+    public function destroy(Productgroup $productgroup)
     {
         if (!Gate::allows('isAdmin')) {
             abort(404,'Cannot perform this Action');
         }
-        if($subcategory->delete()){
-            Flash::success('SubCategory deleted Successifully');
-            return redirect()->route('subcategories.index');
+        if($productgroup->delete()){
+            Flash::success('productgroup deleted Successifully');
+            return redirect()->route('productgroups.index');
         }
     else{
-            Flash::error('SubCategory Could not be deleted');
+            Flash::error('product group Could not be deleted');
             return back()->withImput();
             
         }
