@@ -51,7 +51,7 @@ class Category extends Model
     }
     
     public function productgroups(){
-      return $this->hasMany('App\SubCategory');
+      return $this->hasMany('App\Productgroup');
     }
 
     public function subCategories(){

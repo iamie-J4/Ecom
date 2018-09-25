@@ -95,7 +95,7 @@ class ProductController extends AppBaseController
                 $image = $request->file('image');
                 $filename = time(). '.'.$image->getClientOriginalextension();
                 $path = public_path('images/products/'.$filename);
-                Image::make($image)->save($path);
+                Image::make($image)->save($path)->resize(250,333);
 
                 //'image' = $filename;
             }

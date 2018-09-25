@@ -87,6 +87,10 @@ class Product extends Model
       return $this->belongsTo('App\SubCategory');
     }
 
+    public function productgroup(){
+      return $this->belongsTo('App\Productgroup');
+    }
+
      public function user(){
       return $this->belongsTo('App\User');
     }

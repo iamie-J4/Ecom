@@ -1,5 +1,6 @@
 <?php
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,6 +20,15 @@ Route::get('/', 'WelcomeController@index');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+//api links
+
+Route::get('productapi', 'ProductAPIController@index');
+Route::get('productapi/{id}', 'ProductAPIController@show');
+Route::post('productapi', 'ProductAPIController@store');
+Route::put('productapi', 'ProductAPIController@update');
+Route::delete('productapi', 'ProductAPIController@destroy');
+////api links
 
 
 Auth::routes();

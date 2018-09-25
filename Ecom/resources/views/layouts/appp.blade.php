@@ -53,7 +53,7 @@
                         <li class="{{ Request::is('users*') ? 'active' : '' }} pull right">
                         <a href="{!! route('users.index') !!}"><i class="fa fa-users"></i> <span>All Users</span></a>
                         </li>
-                        <li class="{{ Request::is('users*') ? 'active' : '' }} pull right">
+                        <li class="{{ Request::is('products*') ? 'active' : '' }} pull right">
                         <a href="{!! route('products.index') !!}"><i class="fa fa-sitemap"></i> <span>All Products</span></a>
                         </li>
                     @endcan

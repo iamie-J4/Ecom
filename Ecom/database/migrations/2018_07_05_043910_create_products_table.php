@@ -20,7 +20,7 @@ class CreateProductsTable extends Migration
             $table->string('description')->nullable();
             $table->decimal('price',15,2);
             $table->integer('qty');
-            $table->integer('o_qty')->nullable()->default(0);
+            $table->integer('o_qty')->default(0);
             $table->string('source')->nullable();
             $table->string('image')->nullable();
             $table->integer('category_id')->nullable();

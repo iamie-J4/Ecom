@@ -22,11 +22,6 @@ class AppServiceProvider extends ServiceProvider
             $view->with('categories', \App\Category::kategories());
         });
 
-        \View::composer('welcome', function($view){
-            $view->with('kategories', \App\Category::kategories());
-        });
-
-
         \View::composer('notAdmin.appUser', function($view){
             $view->with('kategoriez', \App\Category::kategories());
         });

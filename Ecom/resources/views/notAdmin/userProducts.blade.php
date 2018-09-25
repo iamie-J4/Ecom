@@ -1,4 +1,4 @@
-@extends('notAdmin.appUser')
+@extends('layouts.app')
 
 @section('content')
 
@@ -19,7 +19,7 @@
 		<div class="container">
 			<div class="col-md-9 product-model-sec">
 
-				@foreach($productgroup->products as $product)
+				{{--@foreach($productgroup->products as $product)
 				<div class="product-grids product-grids-mdl simpleCart_shelfItem wow fadeInUp animated" data-wow-delay=".7s">
 					<div class="new-top">
 						<a href="single.html"><img src="{{asset('images/products/'. $product->image)}}" class="img-responsive" alt=""/></a>
@@ -44,6 +44,22 @@
 							<p class="pric1"><del>RM99999.00</del></p>
 							<p><span class="item_price">{{$product->price}}</span></p>
 						</div>
+					</div>
+				</div>
+				@endforeach --}}
+
+				@foreach($productgroup->products as $product)
+				<div class="col-md-4 gallery-grid gallery-grid1 wow flipInY animated" data-wow-delay=".7s">
+					<a href="single.html"><img src="{{asset('images/products/'. $product->image)}}" class="img-responsive" alt=""/></a>
+					<div class="gallery-text simpleCart_shelfItem">
+						<h5><a class="name" href="single.html">{{$product->name}}</a></h5>
+						<p><span class="item_price">{{$product->price}}</span></p>
+						<h4 class="sizes">Sizes: <a href="#"> s</a> - <a href="#">m</a> - <a href="#">l</a> - <a href="#">xl</a> </h4>
+						<ul>
+							<li><a href="#"><span class="glyphicon glyphicon-globe" aria-hidden="true"></span></a></li>
+							<li><a class="item_add" href="#"><span class="glyphicon glyphicon glyphicon-shopping-cart" aria-hidden="true"></span></a></li>
+							<li><a href="#"><span class="glyphicon glyphicon glyphicon-heart-empty" aria-hidden="true"></span></a></li>
+						</ul>
 					</div>
 				</div>
 				@endforeach
